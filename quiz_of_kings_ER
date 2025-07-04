@@ -1,0 +1,80 @@
+┌─────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                  QUIZ OF KINGS - ER DIAGRAM                                 │
+└─────────────────────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────┐
+│       USERS         │
+├─────────────────────┤
+│ PK u_id (SERIAL)    │
+│    user_name (50)   │ ◄─┐
+│    email (100)      │   │
+│    password (TEXT)  │   │
+│    signup_date      │   │
+└─────────────────────┘   │
+           │              │
+           │              │
+           ▼              │
+┌─────────────────────┐   │
+│    USER_STATS       │   │
+├─────────────────────┤   │
+│ PK u_id             │───┘
+│    game_count       │
+│    win_count        │
+│    average_accuracy │
+│    xp               │
+└─────────────────────┘
+           ▲
+           │
+    ┌─────────────────────┐
+    │    BANNED_USERS     │
+    ├─────────────────────┤
+    │ PK u_id             │───┐
+    │    ban_reason       │   │
+    │    ban_date         │   │
+    └─────────────────────┘   │
+                              │
+    ┌─────────────────────┐   │
+    │      ADMINS         │   │
+    ├─────────────────────┤   │
+    │ PK u_id             │───┘
+    │    admin_since      │
+    └─────────────────────┘
+
+┌─────────────────────┐
+│    CATEGORIES       │
+├─────────────────────┤
+│ PK c_id (SERIAL)    │
+│    category_name    │
+└─────────────────────┘
+           │
+           │ (1:M)
+           ▼
+┌─────────────────────┐        ┌─────────────────────┐
+│     QUESTIONS       │        │   GAME_SESSIONS     │
+├─────────────────────┤        ├─────────────────────┤
+│ PK q_id (SERIAL)    │        │ PK s_id (SERIAL)    │
+│ FK c_id             │        │ FK player1 (users)  │
+│    q_text           │        │ FK player2 (users)  │
+│    option_a         │        │    game_status      │
+│    option_b         │        │    start_time       │
+│    option_c         │        │    end_time         │
+│    option_d         │        │ FK winner_id        │
+│    correct_answer   │        └─────────────────────┘
+│    difficulty_level │                   │
+│    author           │                   │ (1:M)
+│ confirmation_status │                   ▼
+└─────────────────────┘        ┌─────────────────────┐
+           │                   │       ROUNDS        │
+           │ (1:M)             ├─────────────────────┤
+           │                   │ PK r_id (SERIAL)    │
+           └──────────────────►│ FK s_id             │
+                               │ FK q_id             │
+                               │    players_answers  │
+                               │    round_time       │
+                               │    round_number     │
+                               │ FK category_selector│
+                               │ FK selected_category│
+                               │    round_questions  │
+                               │    questions (JSON) │
+                               │    created_at       │
+                               └─────────────────────┘

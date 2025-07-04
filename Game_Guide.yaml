@@ -1,0 +1,22 @@
+---HOW TO START THE PROJECT---
+
+1. go to Quiz of Kings/backend/.env and add your database information
+2. create a virtual environment and install the dependencies in backend/requirments.txt with pip
+3. now run the backend with command "python backend/app.py"
+4. now go to the frontend folder and install frontend dependencies with command "npm install"
+5. now run the frontend with "npm start" and play the game
+
+---KEY FEATURES OF THE GAME---
+
+1. has a login and signup page that you can encounter at the start
+2. after logging in, you can see the leaderboard and your profile
+3. on the top left you could see a management button which will allow you to create new questions and submit them for the admin to approve
+4. admins can add categories and approve questions in the management panel along with adding new questions themselfs. (admins only could be added directly in the database
+5. you could see you status too on the top of the dash board and on the right you have an option to start a new game with a random or selected user
+6. after starting a game you and your opponent will play 5 set of rounds answering 3 questions from a category and in the end of the 5th round the winner will be set and the leaderboard and the users stats will be updated using triggers in the database
+
+the ER diagram and the database queries and table and function creation (schema_dump.sql) are all alongside the Quiz of Kings folder
+more on the table and view creation and triggers and index creation is in Quiz of Kings/backend/db_setup folder
+
+the backend was written with flask framework and python, and sql queries that would fetch the data are in the code in the backend/app/dao files
+the frontend was written with react 
